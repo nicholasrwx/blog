@@ -1,5 +1,7 @@
 Practice App Designed to learn the basics of building a RESTful APP with Ruby on Rails.
 
 Ruby    V 2.3.5
+
 Rails   V 2.4.6
+
 SQLite3 V 3.11.0
