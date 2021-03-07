@@ -1,16 +1,49 @@
 class ArticlesController < ApplicationController
 
+  def index
+    @articles = Article.all
+  end
+
+  def show
+    @article = Article.find(params[:id])
+  end
+
+  
+
+# The reason why we added @article = Article.new in the ArticlesController 
+# is that otherwise @article would be nil in our view, and calling 
+# @article.errors.any? would throw an error.
+  
   def new
+  @article = Article.new #creating a new instance varible called article
+  end
+
+  def edit
+    @article = Article.find(params[:id])
   end
 
   def create
 
       @article = Article.new(article_params)
 
-      @article.save
+     if @article.save
       redirect_to @article
+     else
+      render 'new' #calls the new view... which initiates the new method above
+     end
+
   end
-      
+
+  def update
+    @article = Article.find(params[:id])
+   
+    if @article.update(article_params)
+      redirect_to @article
+    else
+      render 'edit'
+    end
+  end
+
   private 
 
   #white lists controller parameters, and privetizes this function, so it can be manipulated
@@ -18,6 +51,7 @@ class ArticlesController < ApplicationController
  
   def article_params
       params.require(:article).permit(:title, :text)  
-  end                                              #
+  end                                              
 
 end
+
