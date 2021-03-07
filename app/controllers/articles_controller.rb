@@ -8,8 +8,6 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  
-
 # The reason why we added @article = Article.new in the ArticlesController 
 # is that otherwise @article would be nil in our view, and calling 
 # @article.errors.any? would throw an error.
@@ -42,6 +40,13 @@ class ArticlesController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+   
+    redirect_to articles_path
   end
 
   private 
