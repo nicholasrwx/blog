@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -15,10 +16,16 @@ Rails.application.routes.draw do
   
   Rails.application.routes.draw do
  
-    resources :articles
-   
-    root 'welcome#index'
+    resources :articles do
+        resources :comments
+    end
   end
+
+  # This creates comments as a nested resource within articles. 
+  # This is another part of capturing the hierarchical 
+  # relationship that exists between articles and comments.
+
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
